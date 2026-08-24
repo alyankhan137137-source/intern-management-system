@@ -1,0 +1,7 @@
+- [x] Implement `UserModel`
+- [x] Implement `MockAuthService`
+- [x] Redesign `WelcomeScreen` with hero layout and lift states
+- [x] Implement `LoginScreen` with role toggle and loading states
+- [x] Create placeholder `HomeScreen`
+- [x] Connect navigation and verify flow
+- [x] Create professional README file

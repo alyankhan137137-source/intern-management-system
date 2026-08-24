@@ -1,17 +1,58 @@
-# intern_management_system
+# Intern Management System (IMS)
 
-A new Flutter project.
+A professional, centralized lifecycle management platform for internship programs built with Flutter. IMS simplifies tracking, documentation, and talent empowerment through a modern, responsive interface.
 
-## Getting Started
+## 🚀 Key Features
 
-This project is a starting point for a Flutter application.
+- **Professional Hero UI**: A clean, modern Welcome Screen designed with Material 3 principles and high-fidelity interactions.
+- **Dual-Mode Authentication**: Specialized login flows for both **Interns** and **Administrators**.
+- **Mock Data Layer**: Fully functional authentication service using local mock data for rapid prototyping and demonstration.
+- **Interactive UX**: 
+  - Subtle 4px lift states on interaction.
+  - Form validation with inline error messaging.
+  - Integrated loading states during simulated network processes.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tech Stack
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- **Framework**: Flutter (Dart)
+- **UI Toolkit**: Material 3
+- **Fonts**: Google Fonts (Inter)
+- **Icons**: Material Icons & Cupertino Icons
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🔑 Mock Credentials
+
+For testing purposes, the following accounts are pre-populated:
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | `alyankhan12@gmail.com` | `123456` |
+| **Intern** | `alyankhan@internee.pk` | `123456` |
+
+## 📦 Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/intern_management_system.git
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the application**:
+   ```bash
+   flutter run
+   ```
+
+## 📂 Project Structure
+
+- `lib/core`: App themes, constants, and global configurations.
+- `lib/models`: Data models (e.g., `UserModel`).
+- `lib/services`: Business logic and mock data services (e.g., `AuthService`).
+- `lib/views`: UI screens (Welcome, Login, Home, etc.).
+- `lib/widgets`: Reusable UI components.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
