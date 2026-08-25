@@ -3,6 +3,7 @@ import 'package:intern_management_system/core/app_constants.dart';
 import 'package:intern_management_system/core/app_theme.dart';
 import 'package:intern_management_system/models/user.dart';
 import 'package:intern_management_system/models/task.dart';
+import 'package:intern_management_system/models/enterprise_models.dart';
 import 'package:intern_management_system/services/app_repository.dart';
 
 class InternDashboardView extends StatefulWidget {
@@ -16,6 +17,8 @@ class InternDashboardView extends StatefulWidget {
 class _InternDashboardViewState extends State<InternDashboardView> {
   final _repository = AppRepository();
   bool _isLoading = true;
+  final _standupContentController = TextEditingController();
+  final _standupBlockersController = TextEditingController();
 
   @override
   void initState() {
@@ -26,6 +29,25 @@ class _InternDashboardViewState extends State<InternDashboardView> {
   Future<void> _simulateLoading() async {
     await Future.delayed(const Duration(milliseconds: 800));
     if (mounted) setState(() => _isLoading = false);
+  }
+
+  void _submitStandup() {
+    if (_standupContentController.text.trim().isEmpty) return;
+    setState(() {
+      _repository.addStandup(StandupModel(
+        id: DateTime.now().toString(),
+        internId: widget.user.id,
+        internName: widget.user.name,
+        content: _standupContentController.text.trim(),
+        blockers: _standupBlockersController.text.trim(),
+        date: DateTime.now(),
+      ));
+      _standupContentController.clear();
+      _standupBlockersController.clear();
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Standup logged successfully!')),
+    );
   }
 
   @override
@@ -39,12 +61,21 @@ class _InternDashboardViewState extends State<InternDashboardView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Announcement Banner
+          if (_repository.announcements.isNotEmpty) _buildAnnouncementBanner(),
+          
           // Profile Header
           _buildProfileHeader(),
           const SizedBox(height: AppSpacing.xl),
           
           // Metrics Grid
           _buildMetricsGrid(),
+          const SizedBox(height: AppSpacing.xl),
+
+          // Daily Standup Widget
+          Text('Daily Standup / Quick Notes', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: AppSpacing.md),
+          _buildStandupWidget(),
           const SizedBox(height: AppSpacing.xl),
 
           // Milestone Roadmap
@@ -282,6 +313,66 @@ class _InternDashboardViewState extends State<InternDashboardView> {
           const SizedBox(height: 8),
           Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         ],
+      ),
+    );
+  }
+
+  Widget _buildAnnouncementBanner() {
+    final announcement = _repository.announcements.first;
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.error.withOpacity(0.1),
+        borderRadius: AppRadius.containerRadius,
+        border: Border.all(color: AppColors.error.withOpacity(0.3)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.campaign, color: AppColors.error),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(announcement.title, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.error)),
+                Text(announcement.message, style: const TextStyle(fontSize: 12)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStandupWidget() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          children: [
+            TextField(
+              controller: _standupContentController,
+              decoration: const InputDecoration(hintText: 'What did you achieve today?', border: OutlineInputBorder()),
+              maxLines: 2,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            TextField(
+              controller: _standupBlockersController,
+              decoration: const InputDecoration(hintText: 'Any blockers?', border: OutlineInputBorder()),
+              maxLines: 1,
+            ),
+            const SizedBox(height: AppSpacing.md),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _submitStandup,
+                style: ElevatedButton.styleFrom(backgroundColor: AppColors.accent, foregroundColor: Colors.white),
+                child: const Text('Log Daily Standup'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

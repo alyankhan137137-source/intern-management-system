@@ -100,3 +100,69 @@ class JobModel {
     required this.description,
   });
 }
+
+// 7. Announcements
+class AnnouncementModel {
+  final String id;
+  final String title;
+  final String message;
+  final DateTime date;
+  final bool isPriority;
+
+  AnnouncementModel({
+    required this.id,
+    required this.title,
+    required this.message,
+    required this.date,
+    this.isPriority = false,
+  });
+}
+
+// 8. Standups
+class StandupModel {
+  final String id;
+  final String internId;
+  final String internName;
+  final String content;
+  final String blockers;
+  final DateTime date;
+
+  StandupModel({
+    required this.id,
+    required this.internId,
+    required this.internName,
+    required this.content,
+    required this.blockers,
+    required this.date,
+  });
+}
+
+// 9. Audit Logs
+class AuditLogModel {
+  final String id;
+  final String action;
+  final String adminName;
+  final DateTime timestamp;
+
+  AuditLogModel({
+    required this.id,
+    required this.action,
+    required this.adminName,
+    required this.timestamp,
+  });
+}
+
+// 10. Certificates
+class CertificateModel {
+  final String id;
+  final String internId;
+  final DateTime issueDate;
+  final String status;
+
+  CertificateModel({
+    required this.id,
+    required this.internId,
+    required this.issueDate,
+    required this.status,
+  });
+}
