@@ -1,7 +1,10 @@
-- [x] Implement `UserModel`
-- [x] Implement `MockAuthService`
-- [x] Redesign `WelcomeScreen` with hero layout and lift states
-- [x] Implement `LoginScreen` with role toggle and loading states
-- [x] Create placeholder `HomeScreen`
-- [x] Connect navigation and verify flow
-- [x] Create professional README file
+- [x] **Phase 1: Crash Resolution**
+    - [x] Wrap `ResourceCenterView` in `Scaffold` to provide `Material` ancestor
+    - [x] Add `AppBar` with back button to `ResourceCenterView`
+- [x] **Phase 2: UI/UX Adaptivity Fixes**
+    - [x] Replace hardcoded white in `ResourceCenterView` FilterChips
+    - [x] Update `TaskTrackerView` search bar `fillColor` to adaptive theme color
+    - [x] Audit `MessagingView` for hardcoded background colors
+- [x] **Phase 3: Verification**
+    - [x] Verify `ResourceCenterView` navigation from Drawer
+    - [x] Verify search bar legibility in both themes

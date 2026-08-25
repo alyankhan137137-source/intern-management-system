@@ -1,39 +1,27 @@
-# Welcome Screen & Mock Authentication Walkthrough
+# UI/UX Fixes & Crash Resolution Walkthrough
 
-I have implemented a professional Welcome Screen and a functional Mock Authentication flow for the Intern Management System. The implementation focuses on clean UI/UX, precise interaction states, and comprehensive documentation.
+I have resolved the critical crash in the Resource Center and refined the UI/UX across all search and messaging components to ensure a professional, high-fidelity experience in both Light and Dark themes.
 
-## Changes Made
+## Critical Fixes
 
-### 1. Data & Logic Layer
-- **[UserModel](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/models/user.dart)**: Added a role-based user model (`Intern` vs `Admin`).
-- **[AuthService](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/services/auth_service.dart)**: Implemented a mock service with:
-    - 1.5-second simulated network delay.
-    - Updated Credentials:
-        - Intern: `alyankhan@internee.pk` / `123456`
-        - Admin: `alyankhan12@gmail.com` / `123456`
+### 1. Resource Center Crash Resolution
+- **Issue**: The app crashed with a "No Material widget found" error when accessing the Resource Center from the drawer. This happened because `FilterChip` requires a `Material` ancestor.
+- **Fix**: Wrapped [ResourceCenterView](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/intern/resource_center_view.dart) in a `Scaffold`. This provides the necessary `Material` context and automatically adds a back button for seamless navigation.
 
-### 2. UI/UX Enhancements
-- **[WelcomeScreen](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/welcome_screen.dart)**:
-    - Redesigned with a hero layout and professional copywriting.
-    - Added a **4px lift state** on the "Get Started" button using `AnimatedContainer` and `MouseRegion`.
-- **[LoginScreen](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/login_screen.dart)**:
-    - Implemented a custom role toggle (Intern vs Admin).
-    - Integrated `Form` validation with inline error messages.
-    - Added an interactive login button that shows a `CircularProgressIndicator` during the mock authentication delay.
-- **[HomeScreen](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/home_screen.dart)**: Created a placeholder dashboard that displays user details based on their role.
+### 2. Search Bar & Filter Legibility
+- **Issue**: The search bars were hardcoded to a bright white background, which looked unprofessional and provided poor contrast in Dark Mode.
+- **Fix**: Updated the `fillColor` in [TaskTrackerView](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/intern/task_tracker_view.dart) and [ResourceCenterView](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/intern/resource_center_view.dart) to use theme-adaptive surface colors.
 
-### 3. Documentation
-- **[README.md](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/README.md)**: Created a professional project overview including features, tech stack, and mock credentials.
+## UX Enhancements
 
-## Verification & Testing Results
+- **Professional Messaging**: Refined the chat bubbles in [MessagingView](file:///E:/MY ALL FLUTTER PROJECT FILE/intern_management_system/lib/views/intern/features/messaging_view.dart) to use adaptive backgrounds and text colors. Mentor messages now have clear contrast on deep slate backgrounds.
+- **Consistent Card Borders**: Updated all card borders in the Resource Center to follow the enterprise theme standards, ensuring they remain subtle but visible in Dark Mode.
 
-- **Interaction**: Verified the hover lift effect on the Welcome Screen.
-- **Validation**: Confirmed that empty fields or invalid emails trigger appropriate error messages.
-- **Authentication**:
-    - Successfully logged in as an Intern using `alyankhan@internee.pk`.
-    - Successfully logged in as an Admin using `alyankhan12@gmail.com`.
-    - Verified that mismatched roles return a specific error message.
-- **Flow**: Confirmed the transition from Splash -> Welcome -> Login -> Home.
+## Verification Results
+
+- **Crash Test**: Selecting "Resource Center" from the drawer now opens the view correctly with a professional `AppBar` and back button.
+- **Theme Consistency**: All input fields and filter chips now maintain a high-quality "Enterprise" look when switching between Light and Dark modes.
+- **Navigation Flow**: Verified that all drawer-based features can now be navigated to and from without errors.
 
 > [!TIP]
-> You can now test the entire flow starting from the Splash Screen. Use `alyankhan@internee.pk` and `123456` for the Intern view, or `alyankhan12@gmail.com` for the Admin view.
+> Try searching for a task or resource! The search bar now has a subtle, theme-aware background that feels integrated into the professional design.

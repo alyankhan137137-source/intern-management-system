@@ -33,8 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: TweenAnimationBuilder<double>(
           tween: Tween(begin: 0.0, end: 1.0),
@@ -52,25 +54,26 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Placeholder for Logo
+              // Logo with accent blue
               Container(
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.1),
+                  color: AppColors.accent.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: AppColors.accent.withOpacity(0.2)),
                 ),
                 child: const Icon(
                   Icons.business_center_rounded,
                   size: 64,
-                  color: Colors.white,
+                  color: AppColors.accent,
                 ),
               ),
               const SizedBox(height: 24),
               Text(
                 'INTERNLY',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.white,
+                  color: isDark ? Colors.white : AppColors.primary,
                   letterSpacing: 4,
                   fontWeight: FontWeight.bold,
                 ),

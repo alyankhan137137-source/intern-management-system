@@ -30,6 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 decoration: BoxDecoration(
                   color: AppColors.accent.withOpacity(0.1),
                   shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.accent.withOpacity(0.2)),
                 ),
                 child: const Icon(
                   Icons.business_center_rounded,
